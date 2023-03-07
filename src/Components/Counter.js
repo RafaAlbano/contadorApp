@@ -5,12 +5,22 @@ export default class Counter extends Component {
    state = {
     count: 0,
    };
+   incrementar() {
+    if (this.state.count < this.props.max || this.props.min ) {
+        this.setState({ count: this.state.count + 1});
+    }
+   }
+   decrementar() {
+    if (this.state.count > this.props.min) {
+        this.setState({ count: this.state.count - 1});
+    }
+   }
    render() {
     return (
         <View style={StyleSheet.contador}>
             <Text>Contador: {this.state.count}</Text>
-            <Button onPress={() => this.increment()} title="+"/>
-            <Button onPress={() => this.decrement()} title="-"/>
+            <Button onPress={() => this.incrementar()} title="+"/>
+            <Button onPress={() => this.decrementar()} title="-"/>
         </View>
     );
    }
