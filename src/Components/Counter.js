@@ -1,28 +1,38 @@
 import { Component } from 'react';
-import { Button, Text, View,StyleSheet } from 'react-native';
+import { Button, Text, View,StyleSheet, TextInput } from 'react-native';
 
 export default class Counter extends Component {
    state = {
     count: 0,
+    step: 3, 
    };
-   incrementar() {
-    if (this.state.count < this.props.max || this.props.min ) {
-        this.setState({ count: this.state.count + 1});
-    }
+   increment(){
+    this.setState({ count:this.state.count + this.state.step });
    }
-   decrementar() {
-    if (this.state.count > this.props.min) {
-        this.setState({ count: this.state.count - 1});
-    }
+   decrement(){
+    this.setState({ count:this.state.count - this.state.step});
    }
-   render() {
+   alterarStep(texto) {
+    this.setState({ step:parseInt(texto) || this.state.step });
+   }
+   render () {
     return (
-        <View style={StyleSheet.contador}>
-            <Text>Contador: {this.state.count}</Text>
-            <Button onPress={() => this.incrementar()} title="+"/>
-            <Button onPress={() => this.decrementar()} title="-"/>
-        </View>
-    );
+         <View style={styles.contador}>
+            <TextInput
+                value={this.state.step.toString()}
+                onChange={(e) => this.alterarStep(e.nativeEvent.text)}
+                keyboardType="numeric" 
+            />
+            <TextInput
+                defaultValue={this.state.step.toString()}
+                onChangeText={(text) => this.alterarStep(text)}
+                keyboardType="numeric"
+            />
+            <Text> Contador: {this.state.count}</Text>
+            <Button onPress={() =>this.increment()} title="+"/>
+            <Button onPress={() =>this.decrement()} title="-"/>
+         </View>
+     );
    }
 }
 

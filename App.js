@@ -5,6 +5,9 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Counter />
+      <Counter />
+      <Counter />
+      <Counter />
     </View>
   );
 }
